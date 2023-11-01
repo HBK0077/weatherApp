@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" 
+    />
+    <title>Document</title>
+</head>
+<body>
+    <label for="location">location</label>
+    <input type="text" id="place">
+    <button value="submit" id="press">Search</button>
+    <div class="box">
+        <div class="wave -one"></div>
+        <div class="wave -two"></div>
+        <div class="wave -three"></div>
+
+        <div id="weathercond">
+            <i class="fa-solid fa-sun" style="color: #eccc68"></i> 
+        </div>
+        <div class="info">
+            <h2 class="location">
+                <i class="fa-solid fa-street-view"></i>
+                {% location %},{% country %}
+            </h2>
+            <p id="date">SUN | JUL 30 | 06:00PM</p>
+            <h1 class="temp">{% tempval %}</h1>
+            <h3 class="temp_min_max">Min {% tempmin %} | Max {% tempmax %}</h3>
+        </div>
+    </div>
+    
+    <script>
+        const curDate = document.getElementById("date");
+        let weatherCon = document.getElementById("weathercond");
+
+        const tempStatus = "Clouds";
+
+        const getCurrentDay = () =>{
+            var weekDay = new Array(7);
+            weekDay[0] = "Sun";
+            weekDay[1] = "Mon";
+            weekDay[2] = "Tue";
+            weekDay[3] = "Wed";
+            weekDay[4] = "Thu";
+            weekDay[5] = "Fri";
+            weekDay[6] = "Sat";
+            let day = new Date();
+            let d = weekDay[day.getDay()];
+            return d;
+        };
+        //getCurrentDay();
+        const getCurrentTime = () =>{
+            var months = [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec"
+            ]
+            var Tharik = new Date();
+            var month = months[Tharik.getMonth()];
+            console.log(month);
+            var date = Tharik.getDate();
+
+            var hrs = Tharik.getHours();
+            var min = Tharik.getMinutes();
+
+            var periods = "AM";
+            if(hrs>11){
+                periods = "PM";
+                if(hrs > 12) hrs -= 12;
+            }
+            if(min < 10){
+                min = "0"+min;
+            }
+            return `${month} ${date} | ${hrs}:${min} ${periods}`
+        };
+        date.innerHTML = getCurrentDay() + " | " +getCurrentTime();
+    </script>
+</body>
+</html>
